@@ -17,14 +17,14 @@ git clone https://github.com/dpilger26/NumCpp.git
 ## A Quick Start Guide
 
 CDLL constructs sequential Neural Network models using the Module class. Layers (Supporting Dense or fully-connected for now) can be adding with the
-.add_layer class method, which takes in a layer class constructer taking in layer_type and its needed attributes like height and width for Dense layers.
-CDLL is entirely built on a central Tensor<dtype> class which inherits all of its attributres from the NdArray<dtype> class in NumCpp, and contains extra features which allow for smooth Deep Learning-related algebraic operations. To perform a forward pass Module.forward(Tensor<dtype>) can be used, it outputs a single Tensor<dtype> object populated with results of the sequential Matrix Multiplication operations. To train a Module object, simply feed the Module object and training/validation data and their corresponding labels to the Train function:
+`.add_layer` class method, which takes in a layer class constructer taking in layer_type and its needed attributes like height and width for Dense layers.
+CDLL is entirely built on a central `Tensor<dtype>` class which inherits all of its attributres from the `NdArray<dtype>` class in NumCpp, and contains extra features which allow for smooth Deep Learning-related algebraic operations. To perform a forward pass `Module.forward(Tensor<dtype>)` can be used, it outputs a single `Tensor<dtype>` object populated with results of the sequential Matrix Multiplication operations. To train a Module object, simply feed the Module object and training/validation data and their corresponding labels to the Train function:
 
 
-<pre><code>
+```
 void Train(Module & model, Tensor<double> & data, Tensor<double> & labels,\
  Tensor<double> & val_data, Tensor<double> & val_labels, double learning_rate, bool Verbose = false)
-</code></pre>
+```
  
 
 ## Example
