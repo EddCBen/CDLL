@@ -8,7 +8,6 @@ This file contains the main work horse class of CDLL Library : "Tensor"
 /*
     Add indexing [] and double indexing [][] for Tensor<T> class:
 */
-
 #pragma once
 
 #include <iostream>

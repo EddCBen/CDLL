@@ -22,7 +22,6 @@ using namespace activations;
 using namespace layers;
 using namespace std;
 
-
 namespace diff_act_funcs{
 
     Tensor<double> Tanh_d(Tensor<double> in_tens){

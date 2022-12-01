@@ -6,11 +6,11 @@ using namespace std;
 
 int main(){
 
-  Tensor<double> data = init::normal_dist(300,3).mul_val(5.0);
-  Tensor<double> labels = Tensor<double>(zeros<double>(Shape(300,3)));
-  Tensor<double> val_data = norm::z_norm(init::normal_dist(300,3));
-  Tensor<double> val_labels = Tensor<double>(zeros<double>(Shape(300,3)));
-  Tensor<double> test_data = norm::z_norm(init::normal_dist(20,3));
+  Tensor<double> data = init::normal_dist(1000,3).mul_val(5.0);
+  Tensor<double> labels = Tensor<double>(zeros<double>(Shape(1000,3)));
+  Tensor<double> val_data = norm::z_norm(init::normal_dist(1000,3));
+  Tensor<double> val_labels = Tensor<double>(zeros<double>(Shape(1000,3)));
+  Tensor<double> test_data = norm::z_norm(init::normal_dist(300,3));
   double learning_rate = 0.01;
   int EPOCHS = 5;
 
@@ -39,7 +39,7 @@ int main(){
   cout << "-----------TEST-SET---------" << endl;
   cout << "----------------------------" << endl;
 
-  Tensor<double> test_labels = Tensor<double>(zeros<double>(Shape(20,3)));
+  Tensor<double> test_labels = Tensor<double>(zeros<double>(Shape(300,3)));
   for (int i = 0; i < test_data.shape().rows; i++)
   {
     cout << test_data.Row(i) << endl;
