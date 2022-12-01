@@ -43,7 +43,7 @@ First, we create our Training and Validation Data using `init::normal_dist(int n
       val_labels(i, val_data.Row(i).argmax().item()) = 1.0;
     }
  ```
-Next step is conmstructing our Module object `ArgNet` and adding three Dense layers with specific dimensions:
+Next step is constructing our Module object `ArgNet` and adding three Dense layers with specific dimensions, and layer-wise activation functions:
 ```
  Module ArgNet;
   ArgNet.add_layer(layer(Dense(3,10), "Tanh"));
@@ -51,8 +51,9 @@ Next step is conmstructing our Module object `ArgNet` and adding three Dense lay
   ArgNet.add_layer(layer(Dense(5,3), "Softmax"));
  ``` 
  Then for an `int EPOCHS` we can perform Gradient-Descent optimization on our ArgNet model (backpropagation and nn::Module are contained in [include/backprob.hpp](https://github.com/EddCBen/CDLL/blob/main/include/backprob.hpp) and [include/nn.hpp](https://github.com/EddCBen/CDLL/tree/main/nn.hpp) respectively). 
+
+### Training and Validation
  ```
- ### Training and Validation
  for (int epoch = 0; epoch < EPOCHS; epoch++)
   { 
     cout << "Epoch : " << epoch << endl;
