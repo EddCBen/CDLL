@@ -50,7 +50,7 @@ Next step is conmstructing our Module object `ArgNet` and adding three Dense lay
   ArgNet.add_layer(layer(Dense(10,5), "Tanh"));
   ArgNet.add_layer(layer(Dense(5,3), "Softmax"));
  ``` 
- Then for an `int EPOCHS` we can perform Gradient-Descent optimization on our ArgNet model (backpropagation and nn::Module are contained in [include/backprob.hpp](https://github.com/EddCBen/CDLL/tree/main/include) and [include/nn.hpp](https://github.com/EddCBen/CDLL/tree/main/nn.hpp) respectively). 
+ Then for an `int EPOCHS` we can perform Gradient-Descent optimization on our ArgNet model (backpropagation and nn::Module are contained in [include/backprob.hpp](https://github.com/EddCBen/CDLL/blob/main/include/backprob.hpp) and [include/nn.hpp](https://github.com/EddCBen/CDLL/tree/main/nn.hpp) respectively). 
  ```
  ### Training and Validation
  for (int epoch = 0; epoch < EPOCHS; epoch++)
@@ -91,7 +91,7 @@ double tps = 0;
   }                                                  
 ```
 This Loop will produce pairs of [1,3] shaped `Tensor<double>` tensors, representing the input and predicted output for the index of its maximum value.
-For `int EPOCOS = 5;`, the Training and Validation losses are recorded as follows:
+For `int EPOCHS = 5;`, the Training and Validation losses are recorded as follows:
 ```
  Epoch : 0
 Training Loss : 0.697526
