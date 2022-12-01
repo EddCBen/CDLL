@@ -11,9 +11,9 @@ A lightweight C++ Deep Learning Library, a starter for an FPGA-based Neural Netw
 
 In root directory:
 
-'''
+```
 git clone https://github.com/dpilger26/NumCpp.git
-'''
+```
 ## A Quick Start Guide
 
 CDLL constructs sequential Neural Network models using the Module class. Layers (Supporting Dense or fully-connected for now) can be adding with the
