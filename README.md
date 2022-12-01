@@ -32,4 +32,4 @@ void Train(Module & model, Tensor<double> & data, Tensor<double> & labels,\
 In [main.cpp](https://github.com/EddCBen/CDLL/blob/main/main.cpp) we create a small Neural Network ArgNet, formed of sequential Dense layers, and train it 
 to identify the index of the biggest element in a Tensor<double> input of shape [1,3].
 
-First, we create our Training and Validation Data using 'init::normal_dist(int num_samples, int num_features)'
+First, we create our Training and Validation Data using `init::normal_dist(int num_samples, int num_features)`
