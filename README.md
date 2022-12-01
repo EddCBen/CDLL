@@ -8,7 +8,9 @@ A lightweight C++ Deep Learning Library, a starter for an FPGA-based Neural Netw
 ## Dependencies
 
 [NumCpp: A Templatized Header Only C++ Implementation of the Python NumPy Library](https://github.com/dpilger26/NumCpp)
+
 In root directory:
+
 '''
 git clone https://github.com/dpilger26/NumCpp.git
 '''
@@ -24,8 +26,7 @@ void Train(Module & model, Tensor<double> & data, Tensor<double> & labels,\
                                              bool Verbose = false)
 '''
 
-##
-Example
+## Example
  
 In [main.cpp](https://github.com/EddCBen/CDLL/blob/main/main.cpp) we create a small Neural Network ArgNet, formed of sequential Dense layers, and train it 
 to identify the index of the biggest element in a Tensor<double> input of shape [1,3].
