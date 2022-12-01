@@ -109,7 +109,7 @@ Epoch : 4
 Training Loss : 0.0908546
 Validation Loss : 0.148172
  ```
-Note: passing `verbose = true` in the Train function will output realtime Loss values for both splits.
+Note: passing `Verbose = true` in the Train function will output realtime Loss values for both splits.
 The trained ArgNet Neural Network achieves an accuracy of `93.6667%` on the test set. 
 Predicted output VS. Raw input logs:
 ```
