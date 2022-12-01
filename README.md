@@ -50,7 +50,7 @@ Next step is constructing our Module object `ArgNet` and adding three Dense laye
   ArgNet.add_layer(layer(Dense(10,5), "Tanh"));
   ArgNet.add_layer(layer(Dense(5,3), "Softmax"));
  ``` 
- Then for an `int EPOCHS` we can perform Gradient-Descent optimization on our ArgNet model (backpropagation and nn::Module are contained in [include/backprob.hpp](https://github.com/EddCBen/CDLL/blob/main/include/backprob.hpp) and [include/nn.hpp](https://github.com/EddCBen/CDLL/tree/main/nn.hpp) respectively). 
+ Then for an `int EPOCHS` we can perform Gradient-Descent optimization on our ArgNet model (backpropagation and nn::Module are contained in [include/backprob.hpp](https://github.com/EddCBen/CDLL/blob/main/include/backprob.hpp) and [include/nn.hpp](https://github.com/EddCBen/CDLL/blob/main/include/nn.hpp) respectively). 
 
 ### Training and Validation
  ```
