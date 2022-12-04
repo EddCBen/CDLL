@@ -21,7 +21,7 @@ CDLL constructs sequential Neural Network models using the Module class. Layers 
 CDLL is entirely built on a central `Tensor<dtype>` class which inherits all of its attributres from the `NdArray<dtype>` class in NumCpp, and contains extra features which allow for smooth Deep Learning-related algebraic operations. To perform a forward pass `Module.forward(Tensor<dtype>)` can be used, it outputs a single `Tensor<dtype>` object populated with results of the sequential Matrix Multiplication operations. To train a Module object, simply feed the Module object and training/validation data and their corresponding labels to the Train function:
 
 
-```
+```cpp
 void Train(Module & model, Tensor<double> & data, Tensor<double> & labels,\
  Tensor<double> & val_data, Tensor<double> & val_labels, double learning_rate, bool Verbose = false)
 ```
