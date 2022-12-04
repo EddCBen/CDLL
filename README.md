@@ -43,13 +43,16 @@ First, we create our Training and Validation Data using `init::normal_dist(int n
       val_labels(i, val_data.Row(i).argmax().item()) = 1.0;
     }
  ```
-Next step is constructing our Module object `ArgNet` and adding three Dense layers with specific dimensions, and layer-wise activation functions:
+Next step is constructing our Module object `ArgNet` and adding three Dense layers with specific dimensions, layer-wise activation functions, and Dropout_Ratio:
 ```
- Module ArgNet;
-  ArgNet.add_layer(layer(Dense(3,10), "Tanh"));
-  ArgNet.add_layer(layer(Dense(10,5), "Tanh"));
-  ArgNet.add_layer(layer(Dense(5,3), "Softmax"));
- ``` 
+  Module ArgNet;
+  ArgNet.add_layer(layer(Dense(3,10), "Tanh", 0.7));
+  ArgNet.add_layer(layer(Dense(10,10), "Tanh", 0.7));
+  ArgNet.add_layer(layer(Dense(10,10), "Tanh", 0.9));  
+  ArgNet.add_layer(layer(Dense(10,5), "Tanh", 0.9));
+  ArgNet.add_layer(layer(Dense(5,3), "Softmax", 1.0)); 
+  
+``` 
  Then for an `int EPOCHS` we can perform Gradient-Descent optimization on our ArgNet model (backpropagation and nn::Module are contained in [include/backprob.hpp](https://github.com/EddCBen/CDLL/blob/main/include/backprob.hpp) and [include/nn.hpp](https://github.com/EddCBen/CDLL/blob/main/include/nn.hpp) respectively). 
 
 ### Training and Validation
@@ -92,43 +95,57 @@ double tps = 0;
   }                                                  
 ```
 This Loop will produce pairs of [1,3] shaped `Tensor<double>` tensors, representing the input and predicted output for the index of its maximum value.
-For `int EPOCHS = 5;`, the Training and Validation losses are recorded as follows:
+For `int EPOCHS = 15;`, the Training and Validation losses are recorded as follows:
 ```
- Epoch : 0
-Training Loss : 0.697526
-Validation Loss : 0.720253
+Epoch : 0
+Training Loss : 0.676549
+Validation Loss : 0.721304
 Epoch : 1
-Training Loss : 0.218101
-Validation Loss : 0.263989
+Training Loss : 0.321735
+Validation Loss : 0.410367
 Epoch : 2
-Training Loss : 0.135952
-Validation Loss : 0.21052
-Epoch : 3
-Training Loss : 0.103221
-Validation Loss : 0.16885
-Epoch : 4
-Training Loss : 0.0908546
-Validation Loss : 0.148172
+Training Loss : 0.280685
+Validation Loss : 0.377802
+.
+.
+.
+Epoch : 13
+Training Loss : 0.13709
+Validation Loss : 0.244003
+Epoch : 14
+Training Loss : 0.14639
+Validation Loss : 0.198532
+
  ```
 Note: passing `Verbose = true` in the Train function will output realtime Loss values for both splits.
-The trained ArgNet Neural Network achieves an accuracy of `93.6667%` on the test set. 
+The trained ArgNet Neural Network achieves an accuracy of `95%` on the test set. 
 Predicted output VS. Raw input logs:
 ```
- [[0.425696, -0.644478, -0.135925, ]]
+.
+.
+.
 
-[[1, 0, 0, ]]
-
-----------------------------
-[[1.39228, -1.23217, 2.15055, ]]
+ ----------------------------
+[[-0.0324809, -0.524616, 0.994137, ]]
 
 [[0, 0, 1, ]]
 
 ----------------------------
-[[1.68678, -0.868659, -1.24229, ]]
+[[0.376469, -1.11563, -0.767878, ]]
 
 [[1, 0, 0, ]]
-.
-.
-. 
-Test Accuracy is : 93.6667%
+
+----------------------------
+[[1.02356, 0.5343, 1.59396, ]]
+
+[[0, 0, 1, ]]
+
+----------------------------
+[[-0.303147, 0.443155, 0.403574, ]]
+
+[[0, 1, 0, ]]
+
+----------------------------
+Test Accuracy is : 95%
+
 ```
