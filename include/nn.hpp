@@ -13,10 +13,48 @@ This file stores basic Nueral Nerwork workloads based on the Tensor class.
 //#include "backprob.hpp"
 #include <cmath>
 #include <complex>
+#include <random>
 
 using namespace std;
 using namespace nc;
 using namespace TensorCore;
+
+namespace regularization{
+
+    auto dropout(Tensor<double> & tens, double ratio = (double)1.0){
+        Tensor<bool> not_zero;
+        Tensor<double> mull_tens = Tensor<double>(ones<double>(Shape(tens.shape().rows,tens.shape().cols)));
+        int drop_nbr = (int)((1.0 - ratio) * (tens.shape().rows * tens.shape().cols));
+        srand(time(NULL));
+        int zeroed = 0;
+        int row_;
+        int col_;
+
+        if (ratio == (double)1.0)
+        {
+            return tens;
+        }
+        else 
+        {
+        for(int e = 0; e < drop_nbr; e++)
+        {
+            not_zero = mull_tens.not_equ(ones<double>(Shape(tens.shape().rows,\
+                          tens.shape().cols)));
+
+            row_ = rand() % (int)tens.shape().rows;
+            col_ = rand() % (int)tens.shape().cols;
+
+            for (int i = 0; i < mull_tens.shape().rows * mull_tens.shape().cols; i++)
+            {
+                mull_tens(row_, col_) = (double)0.0;
+                
+            }
+        }        
+        return tens.element_mul(mull_tens);
+        }    
+    }
+}   
+
 
 namespace activations{
 
@@ -124,10 +162,12 @@ namespace Core{
             Tensor<double> z; //Raw layer output
             Tensor<double> act; //Activation
             Tensor<double> layer_loss; //layer_wise loss.
-            
-            layer(Dense obj, string act_name) : Dense(obj.height, obj.width){
+            double drop_ratio;
+
+            layer(Dense obj, string act_name, double drop_ratio_in = (double)1.0) : Dense(obj.height, obj.width){
                     act_func = act_name;
-            }  
+                    drop_ratio = drop_ratio_in;
+            }
             layer(Dense obj) : Dense(obj.height, obj.width){}  
 
             Tensor<double> activate(){
@@ -153,6 +193,8 @@ namespace Core{
                     out_tens = out_tens;
                 }
                 
+                //cout << regularization::dropout(out_tens, drop_ratio) << endl;
+                //cout << "-------------------------------" << endl;
                 return out_tens;
             }
         friend ostream& operator<<(ostream& stream, const layer& lay);
@@ -181,6 +223,7 @@ namespace Core{
             output = this->layers.front().pass(in_data);
             this->layers.front().z = output;
             output = this->layers.front().activate();
+            output = regularization::dropout(output, this->layers.front().drop_ratio);
             this->layers.front().act = output;
 
             for (vector<int>::size_type i = 1; i != this->layers.size(); i++)
@@ -188,6 +231,7 @@ namespace Core{
                 output = this->layers[i].pass(output);
                 this->layers[i].z = output;                 
                 output = this->layers[i].activate();
+                output = regularization::dropout(output, this->layers[i].drop_ratio);
                 this->layers[i].act =  output;
             }
             return output;
