@@ -32,7 +32,7 @@ void Train(Module & model, Tensor<double> & data, Tensor<double> & labels,\
 In [main.cpp](https://github.com/EddCBen/CDLL/blob/main/main.cpp) we create a small Neural Network ArgNet, formed of sequential Dense layers, and train it 
 to identify the index of the biggest element in a Tensor<double> input of shape [1,3].
 First, we create our Training and Validation Data using `init::normal_dist(int num_samples, int num_features)`. Lables can be geenrated with a for loop for both splits:
-```
+```cpp
  for (int i = 0; i < labels.shape().rows; i++)
     {
       labels(i, data.Row(i).argmax().item()) = 1.0;
@@ -44,7 +44,7 @@ First, we create our Training and Validation Data using `init::normal_dist(int n
     }
  ```
 Next step is constructing our Module object `ArgNet` and adding three Dense layers with specific dimensions, layer-wise activation functions, and Dropout_Ratio:
-```
+```cpp
   Module ArgNet;
   ArgNet.add_layer(layer(Dense(3,10), "Tanh", 0.7));
   ArgNet.add_layer(layer(Dense(10,10), "Tanh", 0.7));
@@ -56,7 +56,7 @@ Next step is constructing our Module object `ArgNet` and adding three Dense laye
  Then for an `int EPOCHS` we can perform Gradient-Descent optimization on our ArgNet model (backpropagation and nn::Module are contained in [include/backprob.hpp](https://github.com/EddCBen/CDLL/blob/main/include/backprob.hpp) and [include/nn.hpp](https://github.com/EddCBen/CDLL/blob/main/include/nn.hpp) respectively). 
 
 ### Training and Validation
- ```
+ ```cpp
  for (int epoch = 0; epoch < EPOCHS; epoch++)
   { 
     cout << "Epoch : " << epoch << endl;
@@ -66,7 +66,7 @@ Next step is constructing our Module object `ArgNet` and adding three Dense laye
 ### Testing
 Testing can be simply performed by using the `.forward(Tensor<dtype> tens)` on the trained Module object ArgNet.
  
-```
+```cpp
  Tensor<double> test_labels = Tensor<double>(zeros<double>(Shape(300,3)));
   for (int i = 0; i < test_data.shape().rows; i++)
   {
@@ -81,7 +81,7 @@ Testing can be simply performed by using the `.forward(Tensor<dtype> tens)` on t
                                                   
 To test the trained ArgNet model, we pass a Test set of randomly initialized numbers to it, and record the outputs, and the number of true positives
 `int tps` in order to calculate the Test Accuracy at the end.
-```
+```cpp
 double tps = 0;
   for (int i = 0; i < test_labels.shape().rows; i++)
   {
@@ -95,7 +95,7 @@ double tps = 0;
   }                                                  
 ```
 This Loop will produce pairs of [1,3] shaped `Tensor<double>` tensors, representing the input and predicted output for the index of its maximum value.
-For `int EPOCHS = 15;`, the Training and Validation losses are recorded as follows:
+For `cpp int EPOCHS = 15;`, the Training and Validation losses are recorded as follows:
 ```
 Epoch : 0
 Training Loss : 0.676549
