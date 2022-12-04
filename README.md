@@ -95,7 +95,7 @@ double tps = 0;
   }                                                  
 ```
 This Loop will produce pairs of [1,3] shaped `Tensor<double>` tensors, representing the input and predicted output for the index of its maximum value.
-For `cpp int EPOCHS = 15;`, the Training and Validation losses are recorded as follows:
+For `int EPOCHS = 15;`, the Training and Validation losses are recorded as follows:
 ```
 Epoch : 0
 Training Loss : 0.676549
