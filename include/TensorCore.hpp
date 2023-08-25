@@ -69,6 +69,9 @@ namespace TensorCore{
             auto avg(){
                 return Tensor<double>(average(*this));
             }
+            auto not_equ(Tensor<double> other){
+                return Tensor<bool>(not_equal((*this), other));
+            }
            
             ostream operator<<(Tensor<T> arg2); // Operator overloading for Tensor Object
             T& operator()(int);
